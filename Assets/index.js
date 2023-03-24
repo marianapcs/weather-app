@@ -112,7 +112,7 @@ renderButtons();
 
 function displayForecast(cityID){
 //construct the API URL again 
-    var forecastURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityID + "&appid=" + apiKey;
+    var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + apiKey;
     $.ajax({
         url: forecastURL,
         method: "GET"
@@ -133,23 +133,38 @@ function displayForecast(cityID){
             //same for wind and humidity
             var forecastHumidity = response.list[i].main.humidity + '%';
             var forecastWind = response.list[i].wind.speed +"KPH";
+            
+            
 
+             //need to create new card el to put the info in
+            var forecastCard = $("<div>").addClass("card col-md-2 ml-4 text-dark forecast-info");
+            var forecastCardBody = $("<div>").addClass("card-body p-2");
+
+            //you need the icon so get URL for it and create el like previous
+            var weatherIconUrl = 'http://openweathermap.org/img/w/' + response.list[i].weather[0].icon + '.png';
+            var iconContainer = $("<div id='weather-icon'>").html("<img src='" + weatherIconUrl + "' alt='Weather Icon'>");
+
+            //need an element for the date of forecast
+            var forecastDate = $("<h6>").text(forecastDate);
+            forecastCardBody.append(forecastDate);
+           
+            //weather icon for card body
+            forecastCardBody.append(iconContainer);
+
+            //add all the info into card body (temp,wind,humidity,etc)
+           forecastCardBody.append("<p>" + "Temp:" + forecastTemp +"<p>");
+           forecastCardBody.append("<p>" + "wind:"+ forecastWind + "<p>");
+           forecastCardBody.append("<p>" + "Humidity:" + forecastHumidity + "<p>");
+
+
+           //cardbody to be added to card el
+           forecastCard.append(forecastCardBody);
+           
+           
+           //add card el to forecast
+           forecast.append(forecastCard);
         }
-
-
-        //need to create new card el to put the info in
-        //you need the icon so get URL for it and create el like previous
-
-        //need an element for the date of forecast
-
-        //weather icon for card body
-
-        //add all the info into card body (temp,wind,humidity,etc)
-
-        //cardbody to be added to card el
-
-        //add card el to forecast
-    })
+    });
 }
 
 
