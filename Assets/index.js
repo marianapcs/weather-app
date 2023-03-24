@@ -45,26 +45,55 @@ function displayWeather(response) {
 }
 
 //Need an event listener for the search button
+$("#search-button").on("click", function (event){
+    event.preventDefault();
+    city = $("#search-input").val().trim();
+    //if input field is empty
+    if (!city){
+        return;
+    }
+    //search history return if the city has already been searched for
+    if (searchHistory.includes(city)){
+        return;
+    }
+    
+    //need to construct the API query and make AJAX request
 
-//if input field is empty
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    $.ajax({
+        url:queryURL,
+        method:"GET"
+    }).then(displayWeather);
 
-//search history return if the city has already been searched for
+    //you want to add the city to the search history 
+    //update local storage
+    searchHistory.push(city);
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
-//need to construct the API query and make AJAX request
+    //clear inout and render the search history button
+    $("#search-input").val("");
+    renderButtons();
+});
 
-//you want to add the city to the search history 
-//update local storage
 
-//clear inout and render the search history button
+
 
 //create a function for rendering search history buttons 
-
-
-//loop through the search history 
-//create a button for each city 
-
+function renderButtons(){
+    $('.list-group').empty();
+    //loop through the search history 
+    for (var i = 0; i < searchHistory.length; i++) {
+        var a=$("<button>");
+        a.addClass("city btn-secondary");
+        a.attr("data-name", searchHistory [i]);
+        a.text(searchHistory[i]);
+        $(".list-group").append(a);
+    }
+    
+}
 
 //you need an event listener for the search history buttons
+$(document).on
 
 
 // * Create a weather dashboard with form inputs.
