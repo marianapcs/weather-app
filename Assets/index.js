@@ -15,7 +15,17 @@ function displayWeather(response) {
     //want temp in celcius
     var celciusTemp = "Temp:" + (response.main.temp - 273.15).toFixed(2) + "°C";
 
-    
+    //do the same for speed and humidity
+    var windSpeed = "Wind: " + response.wind.speed + "KPH";
+    var humidity = "Humidity: " + response.main.humidity + '%';
+
+    //put today's weather in a card
+    var todayCard = $("<div>").addClass("card bg-dark border-light");
+    var todayCardBody = $("<div>").addClass("card-body text-light p-2");
+
+    //weather icon on the card
+    var weatherIconUrl = 'http://openweathermap.org/img/w/' + response.weather[0].icon + '.png';
+
 }
 
 
