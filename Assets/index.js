@@ -25,7 +25,23 @@ function displayWeather(response) {
 
     //weather icon on the card
     var weatherIconUrl = 'http://openweathermap.org/img/w/' + response.weather[0].icon + '.png';
+    var iconContainer = $("<div id='weather-icon'>").html("<img src='" + weatherIconUrl + "' alt='Weather Icon'>");
 
+    //City name and date to be added to card
+    var todayDate = $("<h4>").text(response.name + "(" + date +")");
+    todayCardBody.append(todayDate);
+
+    //need to add temp, wind and humidity info to card
+    todayCardBody.append(iconContainer);
+    todayCardBody.append("<p>" + celciusTemp + "<p>");
+    todayCardBody.append("<p>" + windSpeed + "<p>");
+    todayCardBody.append("<p>" + + humidity + "<p>");
+
+    //caard to page and display forecast
+    todayCard.append(todayCardBody);
+    today.empty();
+    today.append(todayCard);
+    displayForecast(response.id);
 }
 
 
