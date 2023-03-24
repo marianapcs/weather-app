@@ -120,13 +120,22 @@ function displayForecast(cityID){
         console.log(response);
 
         //you want to empty element before adding new forecast
+        forecast.empty();
         //you need a title for this section
+        today.append("<br>"+"<h5>"+"5 Day Forecast:"+"</h5>");
         //loop the data like you did before to create a card for each day
         //api shows weather for every 3 hours so increment by 8 to skip to next day to show each day
+        for (var i = 1; i < response.list.length; i+=8){
+            //get the date and format it
+            var forecastDate = moment(response.list[i].dt_txt).add(1, 'days').format("MM/DD/YYYY");
+            //get temp and format like before
+            var forecastTemp = (response.list[i].main.temp - 273.15).toFixed(2) + "°C";
+            //same for wind and humidity
+            var forecastHumidity = response.list[i].main.humidity + '%';
+            var forecastWind = response.list[i].wind.speed +"KPH";
 
-        //get the date and format it
-        //get temp and format like before
-        //same for wind and humidity
+        }
+
 
         //need to create new card el to put the info in
         //you need the icon so get URL for it and create el like previous
