@@ -92,21 +92,58 @@ function renderButtons(){
     
 }
 
-//you need an event listener for the search history buttons
-$(document).on
+$(document).on("click", ".city", function() {
+    var city = $(this).attr("data-name");
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(displayWeather);
+});
 
+renderButtons();
 
-// * Create a weather dashboard with form inputs.
-//   * When a user searches for a city they are presented with current and future conditions for that city and that city is added to the search history
-//   * When a user views the current weather conditions for that city they are presented with:
-//     * The city name
-//     * The date
-//     * An icon representation of weather conditions
-//     * The temperature
-//     * The humidity
-//     * The wind speed
 //   * When a user view future weather conditions for that city they are presented with a 5-day forecast that displays:
 //     * An icon representation of weather conditions
 //     * The temperature
 //     * The humidity
+
+//make a function that takes city ID and displays the 5-day forecast 
+
+function displayForecast(cityID){
+//construct the API URL again 
+    var forecastURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityID + "&appid=" + apiKey;
+    $.ajax({
+        url: forecastURL,
+        method: "GET"
+    }).then(function(response){
+        console.log(response);
+
+        //you want to empty element before adding new forecast
+        //you need a title for this section
+        //loop the data like you did before to create a card for each day
+        //api shows weather for every 3 hours so increment by 8 to skip to next day to show each day
+
+        //get the date and format it
+        //get temp and format like before
+        //same for wind and humidity
+
+        //need to create new card el to put the info in
+        //you need the icon so get URL for it and create el like previous
+
+        //need an element for the date of forecast
+
+        //weather icon for card body
+
+        //add all the info into card body (temp,wind,humidity,etc)
+
+        //cardbody to be added to card el
+
+        //add card el to forecast
+    })
+}
+
+
+
 //   * When a user click on a city in the search history they are again presented with current and future conditions for that city
+
