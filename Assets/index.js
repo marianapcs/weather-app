@@ -44,6 +44,27 @@ function displayWeather(response) {
     displayForecast(response.id);
 }
 
+//Need an event listener for the search button
+
+//if input field is empty
+
+//search history return if the city has already been searched for
+
+//need to construct the API query and make AJAX request
+
+//you want to add the city to the search history 
+//update local storage
+
+//clear inout and render the search history button
+
+//create a function for rendering search history buttons 
+
+
+//loop through the search history 
+//create a button for each city 
+
+
+//you need an event listener for the search history buttons
 
 
 // * Create a weather dashboard with form inputs.
